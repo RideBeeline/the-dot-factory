@@ -1432,13 +1432,21 @@ namespace TheDotFactory
                 // iterate characters
                 foreach (CharacterDescriptorArrayBlock.Character character in block.characters)
                 {
+
+                    //Prevent the backslash escape character from causing the comment to run over multiple lines
+                    string displayedCharacter;
+                    if (character.character == '\\')
+                        displayedCharacter = "backslash";
+                    else
+                        displayedCharacter = character.character.ToString();
+
                     // add character
                     resultTextSource += String.Format("\t{{{0}{1}{2}}}, \t\t{3}{4}{5}" + nl,
                                                     getCharacterDescString(m_outputConfig.descCharWidth, character.width),
                                                     getCharacterDescString(m_outputConfig.descCharHeight, character.height),
                                                     character.offset,
                                                     m_commentStartString,
-                                                    character.character,
+                                                    displayedCharacter,
                                                     m_commentEndString + " ");
                 }
 
